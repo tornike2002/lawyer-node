@@ -4,6 +4,13 @@ import { validate } from '../middlewares/validate'
 import { registerSchema, loginSchema } from '../validators/auth'
 
 const router = Router()
+// admin routes
+router.post('/register', validate(registerSchema), register)
+router.post('/login', validate(loginSchema), login)
+router.post('/logout', logout)
+
+export default router
+
 /**
  * @swagger
  * /api/auth/register:
@@ -66,7 +73,6 @@ const router = Router()
  *         description: Admin logged out successfully
  */
 
-router.post('/register', validate(registerSchema), register)
 /**
  * @swagger
  * /api/auth/login:
@@ -94,8 +100,3 @@ router.post('/register', validate(registerSchema), register)
  *       401:
  *         description: Invalid credentials
  */
-
-router.post('/login', validate(loginSchema), login)
-router.post('/logout', logout)
-
-export default router

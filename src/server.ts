@@ -3,6 +3,7 @@ import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import authRoutes from './routes/auth'
 import carouselRoutes from './routes/carousel'
+import bannersRoutes from './routes/banners'
 const app = express()
 
 app.use(cors())
@@ -12,5 +13,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/carousel', carouselRoutes)
+app.use('api/banners', bannersRoutes)
 
 export default app

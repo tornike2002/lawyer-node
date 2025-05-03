@@ -19,6 +19,6 @@ const bannersSchema = new mongoose.Schema(
   { timestamps: true },
 )
 
-const Banners = mongoose.model('banners', bannersSchema)
+const Banners = mongoose.model('Banners', bannersSchema)
 
 export default Banners
