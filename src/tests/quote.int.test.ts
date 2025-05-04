@@ -8,8 +8,9 @@ dotenv.config()
 let token: string
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL!)
-  const res = await createTestAdmin()
+  const uniqueDbUrl = `${process.env.MONGO_URL!}-quote-test`
+  await mongoose.connect(uniqueDbUrl)
+  const res = await createTestAdmin('-quote')
   token = res.token
 })
 
@@ -38,12 +39,29 @@ describe('Quote Carousel API', () => {
     expect(Array.isArray(res.body)).toBe(true)
   })
   it('should update quote item', async () => {
-    const res = await request(app).put(`/api/quotes/${id}`).set('Cookie', `token=${token}`).send({
-      quote: 'test quote',
-      rating: 2.5,
-      fullname: 'test name',
-      position: 'test position',
-    })
+    if (!id) {
+      const createRes = await request(app)
+        .post('/api/quotes')
+        .set('Cookie', `token=${token}`)
+        .send({
+          quote: 'test quote for update',
+          rating: 2.5,
+          fullname: 'test name',
+          position: 'test position',
+        })
+      id = createRes.body._id
+    }
+    
+    const res = await request(app)
+      .put(`/api/quotes/${id}`)
+      .set('Cookie', `token=${token}`)
+      .send({
+        quote: 'test quote',
+        rating: 2.5,
+        fullname: 'test name',
+        position: 'test position',
+      })
+
     expect(res.status).toBe(200)
     expect(res.body.quote).toBe('test quote')
     expect(res.body.rating).toBe(2.5)
@@ -52,6 +70,19 @@ describe('Quote Carousel API', () => {
   })
 
   it('should delete quote item', async () => {
+    if (!id) {
+      const createRes = await request(app)
+        .post('/api/quotes')
+        .set('Cookie', `token=${token}`)
+        .send({
+          quote: 'test quote for delete',
+          rating: 2.5,
+          fullname: 'test name',
+          position: 'test position',
+        })
+      id = createRes.body._id
+    }
+    
     const res = await request(app).delete(`/api/quotes/${id}`).set('Cookie', `token=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Quote Item deleted Successfully')

@@ -6,8 +6,9 @@ import { createTestAdmin } from './utils/createTestAdmin'
 let token: string
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL!)
-  const res = await createTestAdmin()
+  const uniqueDbUrl = `${process.env.MONGO_URL!}-banners-test`
+  await mongoose.connect(uniqueDbUrl)
+  const res = await createTestAdmin('-banners')
   token = res.token
 })
 
