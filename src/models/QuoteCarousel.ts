@@ -5,7 +5,7 @@ const QuoteCarouselSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   fullname: { type: String, required: true },
   position: { type: String, required: true },
-})
+}, { timestamps: true })
 
 const QuoteSchema = mongoose.model('Quote', QuoteCarouselSchema)
 
