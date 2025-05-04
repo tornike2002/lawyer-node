@@ -6,23 +6,17 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 beforeAll(async () => {
-  const uniqueDbUrl = `${process.env.MONGO_URL as string}-auth-test`
-  await mongoose.connect(uniqueDbUrl)
+  await mongoose.connect(process.env.MONGO_URL as string)
 })
 
 afterAll(async () => {
   await mongoose.connection.dropDatabase()
-  await mongoose.connection.close()
+  await mongoose.disconnect()
 })
 
 describe('Auth API', () => {
-  const testEmail = 'test-auth@test.com'
+  const testEmail = 'test@test.com'
   const testPassword = 'test123'
-  
-  beforeEach(async () => {
-    await new Promise(resolve => setTimeout(resolve, 100))
-  })
-  
   it('should register an Admin', async () => {
     const res = await request(app)
       .post('/api/auth/register')

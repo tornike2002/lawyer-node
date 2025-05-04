@@ -5,9 +5,9 @@ import dotenv from 'dotenv'
 
 dotenv.config()
 
-export const createTestAdmin = async (emailSuffix = '') => {
+export const createTestAdmin = async () => {
   const password = await bcrypt.hash('testpassword', 10)
-  const admin = await Admin.create({ email: `test${emailSuffix}@test.com`, password })
+  const admin = await Admin.create({ email: 'test@test.com', password })
 
   const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET!, { expiresIn: '1h' })
   return { admin, token }

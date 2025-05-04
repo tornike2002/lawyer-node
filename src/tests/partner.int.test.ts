@@ -6,10 +6,9 @@ import { describe } from 'node:test'
 
 let token: string
 beforeAll(async () => {
-  const uniqueDbUrl = `${process.env.MONGO_URL!}-partner-test`
-  await mongoose.connect(uniqueDbUrl)
-  const resp = await createTestAdmin('-partner')
-  token = resp.token
+  await mongoose.connect(process.env.MONGO_URL!)
+  const res = await createTestAdmin()
+  token = res.token
 })
 
 afterAll(async () => {
@@ -19,7 +18,7 @@ afterAll(async () => {
 
 describe('Partners API', () => {
   let id: string
-  
+
   it('should get all partners', async () => {
     const res = await request(app).get('/api/partner')
     expect(res.status).toBe(200)
@@ -41,7 +40,7 @@ describe('Partners API', () => {
       },
       services: [],
     }
-    
+
     const res = await request(app)
       .post('/api/partner')
       .set('Cookie', `token=${token}`)
@@ -52,27 +51,6 @@ describe('Partners API', () => {
   })
 
   it('should update partner', async () => {
-    if (!id) {
-      const createRes = await request(app)
-        .post('/api/partner')
-        .set('Cookie', `token=${token}`)
-        .send({
-          fullname: 'test for update',
-          position: 'test',
-          about: 'about',
-          biography: 'bio',
-          image: 'https://www.google.com/',
-          cover: 'https://www.google.com/',
-          contact: {
-            linkedin: 'https://www.google.com/',
-            phone: '555223344',
-            email: 'test@test.com',
-          },
-          services: [],
-        })
-      id = createRes.body._id
-    }
-    
     const res = await request(app)
       .put(`/api/partner/${id}`)
       .set('Cookie', `token=${token}`)
@@ -123,7 +101,7 @@ describe('Partners API', () => {
         })
       id = createRes.body._id
     }
-    
+
     const res = await request(app).delete(`/api/partner/${id}`).set('Cookie', `token=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Partner deleted successfully')
