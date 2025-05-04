@@ -4,6 +4,7 @@ import cors from 'cors'
 import authRoutes from './routes/auth'
 import carouselRoutes from './routes/carousel'
 import bannersRoutes from './routes/banners'
+import quoteRoutes from './routes/quoteCarousel'
 const app = express()
 
 app.use(cors())
@@ -14,5 +15,6 @@ app.use(express.urlencoded({ extended: true }))
 app.use('/api/auth', authRoutes)
 app.use('/api/carousel', carouselRoutes)
 app.use('/api/banners', bannersRoutes)
+app.use('/api/quotes', quoteRoutes)
 
 export default app
