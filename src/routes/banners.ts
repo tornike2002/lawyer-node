@@ -6,8 +6,9 @@ import { requireAdmin } from '../middlewares/auth'
 const router = Router()
 
 // public routes
-
 router.get('/', getAllBanners)
+
+// admin routes
 router.post('/', requireAdmin, validate(bannersSchema), createBanners)
 router.put('/:id', requireAdmin, validate(bannersSchema), updateBanners)
 router.delete('/:id', requireAdmin, deleteBanners)
