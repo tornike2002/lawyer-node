@@ -20,66 +20,39 @@ describe('Banners API', () => {
   let id: string
 
   it('should create banners item', async () => {
-    const res = await request(app)
-      .post(`/api/banners/${id}`)
-      .set('Cookie', `token=${token}`)
-      .send({
-        title: 'Test Banners',
-        description: 'Test Description',
-        banners: {
-          left: {
-            title: 'Left title',
-            link: 'https://www.google.com',
-          },
-          right: {
-            title: 'Right title',
-            link: 'https://www.google.com',
-            revenue: '800k',
-          },
-        },
-      })
+    const res = await request(app).post('/api/banners').set('Cookie', `token=${token}`).send({
+      title: 'Test Banners',
+      link: 'https://www.google.com',
+      image: 'https://www.google.com',
+      revenue: 'revenue',
+    })
     expect(res.status).toBe(201)
     id = res.body._id
   })
 
   it('should get all banners item', async () => {
-    const res = await request(app).get(`/api/banners/${id}`)
+    const res = await request(app).get(`/api/banners`)
     expect(res.status).toBe(200)
     expect(Array.isArray(res.body)).toBe(true)
   })
 
   it('should update a banners item', async () => {
-    const res = await request(app)
-      .put(`/api/banners/${id}`)
-      .set('Cookie', `token=${token}`)
-      .send({
-        title: 'Test Banners',
-        description: 'Test Description',
-        banners: {
-          left: {
-            title: 'Left title',
-            link: 'https://www.google.com',
-          },
-          right: {
-            title: 'Right title',
-            link: 'https://www.google.com',
-            revenue: '800k',
-          },
-        },
-      })
+    const res = await request(app).put(`/api/banners/${id}`).set('Cookie', `token=${token}`).send({
+      title: 'Test Banners',
+      link: 'https://www.google.com',
+      image: 'https://www.google.com',
+      revenue: 'revenue',
+    })
     expect(res.status).toBe(200)
     expect(res.body.title).toBe('Test Banners')
-    expect(res.body.description).toBe('Test Description')
-    expect(res.body.banners.left.title).toBe('Left title')
-    expect(res.body.banners.left.link).toBe('https://www.google.com')
-    expect(res.body.banners.right.title).toBe('Right title')
-    expect(res.body.banners.right.link).toBe('https://www.google.com')
-    expect(res.body.banners.right.revenue).toBe('800k')
+    expect(res.body.link).toBe('https://www.google.com')
+    expect(res.body.image).toBe('https://www.google.com')
+    expect(res.body.revenue).toBe('revenue')
   })
 
   it('should delete banners item', async () => {
     const res = await request(app).delete(`/api/banners/${id}`).set('Cookie', `token=${token}`)
     expect(res.status).toBe(200)
-    expect(res.body.message("Banner item deleted successfully"))
+    expect(res.body.message).toBe('Banner item deleted successfully')
   })
 })

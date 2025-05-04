@@ -13,6 +13,6 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/auth', authRoutes)
 app.use('/api/carousel', carouselRoutes)
-app.use('api/banners', bannersRoutes)
+app.use('/api/banners', bannersRoutes)
 
 export default app

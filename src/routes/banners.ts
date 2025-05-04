@@ -7,14 +7,12 @@ const router = Router()
 
 // public routes
 
-router.get('/', validate(bannersSchema), getAllBanners)
+router.get('/', getAllBanners)
+router.post('/', requireAdmin, validate(bannersSchema), createBanners)
 router.put('/:id', requireAdmin, validate(bannersSchema), updateBanners)
-router.post('/:id', requireAdmin, validate(bannersSchema), createBanners)
 router.delete('/:id', requireAdmin, deleteBanners)
 
-
 export default router
-
 
 /**
  * @swagger
@@ -53,7 +51,7 @@ export default router
  *         description: Unauthorized
  *       403:
  *         description: Forbidden - Admin access required
- * 
+ *
  * /api/banners/{id}:
  *   put:
  *     summary: Update a banner item

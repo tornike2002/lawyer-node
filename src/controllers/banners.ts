@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
 import Banners from '../models/Banners'
 
-export const getAllBanners = async (req: Request, res: Response) => {
-  const data = await Banners.find()
+export const getAllBanners = async (_req: Request, res: Response) => {
+  const data = await Banners.find().sort({ createdAt: -1 }).limit(2)
   res.status(200).json(data)
 }
 
 export const createBanners = async (req: Request, res: Response) => {
-  const data = Banners.create(req.body)
+  const data = await Banners.create(req.body)
   res.status(201).json(data)
 }
 
@@ -22,7 +22,7 @@ export const updateBanners = async (req: Request, res: Response) => {
 }
 
 export const deleteBanners = async (req: Request, res: Response) => {
-  const data = Banners.findByIdAndDelete(req.params.id)
+  const data = await Banners.findByIdAndDelete(req.params.id)
 
   if (!data) {
     res.status(404).json({ message: 'Banner item not found' })
