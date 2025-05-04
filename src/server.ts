@@ -6,7 +6,7 @@ import carouselRoutes from './routes/carousel'
 import bannersRoutes from './routes/banners'
 import quoteRoutes from './routes/quoteCarousel'
 import partnerRoutes from './routes/partner'
-
+import contactRoutes from './routes/contact'
 const app = express()
 
 app.use(cors())
@@ -19,5 +19,5 @@ app.use('/api/carousel', carouselRoutes)
 app.use('/api/banners', bannersRoutes)
 app.use('/api/quotes', quoteRoutes)
 app.use('/api/partner', partnerRoutes)
-
+app.use('/api/contact', contactRoutes)
 export default app
