@@ -10,6 +10,7 @@ import contactRoutes from './routes/contact'
 import faqRoutes from './routes/faq'
 import practiceRoutes from './routes/practice'
 import blogRoutes from './routes/blogs'
+import categoryRoutes from './routes/category'
 const app = express()
 
 app.use(cors())
@@ -26,4 +27,5 @@ app.use('/api/contact', contactRoutes)
 app.use('/api/faq', faqRoutes)
 app.use('/api/practice', practiceRoutes)
 app.use('/api/blogs', blogRoutes)
+app.use('/api/categories', categoryRoutes)
 export default app
