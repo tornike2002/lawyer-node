@@ -8,6 +8,8 @@ import quoteRoutes from './routes/quoteCarousel'
 import partnerRoutes from './routes/partner'
 import contactRoutes from './routes/contact'
 import faqRoutes from './routes/faq'
+import practiceRoutes from './routes/practice'
+
 const app = express()
 
 app.use(cors())
@@ -22,4 +24,5 @@ app.use('/api/quotes', quoteRoutes)
 app.use('/api/partner', partnerRoutes)
 app.use('/api/contact', contactRoutes)
 app.use('/api/faq', faqRoutes)
+app.use('/api/practice', practiceRoutes)
 export default app
