@@ -50,6 +50,14 @@ describe('Partners API', () => {
     id = res.body._id
   })
 
+  it('should get partner by id', async () => {
+    const res = await request(app).get(`/api/partner/${id}`)
+
+    expect(res.status).toBe(200)
+    expect(res.body._id).toBe(id)
+    expect(Array.isArray(res.body.services)).toBe(true)
+  })
+
   it('should update partner', async () => {
     const res = await request(app)
       .put(`/api/partner/${id}`)

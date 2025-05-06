@@ -2,12 +2,13 @@ import { Router } from 'express'
 import { validate } from '../middlewares/validate'
 import { partnerSchema } from '../validators/partner'
 import { requireAdmin } from '../middlewares/auth'
-import { getAllPartners, createPartner, updatePartner, deletePartner } from '../controllers/partner'
+import { getAllPartners, createPartner, updatePartner, deletePartner, getPartnerById } from '../controllers/partner'
 
 const router = Router()
 
 // public
 router.get('/', getAllPartners)
+router.get('/:id', getPartnerById)
 
 // admin
 router.post('/', requireAdmin, validate(partnerSchema), createPartner)

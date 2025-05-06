@@ -11,6 +11,15 @@ export const getAllPartners = async (req: Request, res: Response) => {
   res.status(200).json(partners)
 }
 
+export const getPartnerById = async (req: Request, res: Response) => {
+  const partner = await PartnerSchema.findById(req.params.id)
+  if (!partner) {
+    res.status(404).json({ message: 'Partner not found' })
+    return
+  }
+  res.status(200).json(partner)
+}
+
 export const updatePartner = async (req: Request, res: Response) => {
   const data = await PartnerSchema.findByIdAndUpdate(req.params.id, req.body, { new: true })
   if (!data) {
