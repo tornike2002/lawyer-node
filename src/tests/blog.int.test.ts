@@ -17,10 +17,9 @@ beforeAll(async () => {
 afterAll(async () => {
   await mongoose.connection.dropDatabase()
   await mongoose.connection.close()
-})  
+})
 
 describe('Blog API', () => {
-
   it('should create a new blog', async () => {
     const response = await request(app)
       .post('/api/blogs')
@@ -52,27 +51,34 @@ describe('Blog API', () => {
   })
 
   it('should get all blogs', async () => {
-    const response = await request(app)
-      .get('/api/blogs')    
+    const response = await request(app).get('/api/blogs')
 
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Blogs fetched successfully')
     expect(response.body.data.length).toBeGreaterThan(0)
   })
 
-
   it('should get a blog by slug', async () => {
     const response = await request(app)
       .get(`/api/blogs/${slug}`)
 
+    console.log('Get blog by slug response:', response.body, 'Slug used:', slug)
     expect(response.status).toBe(200)
-    expect(response.body.message).toBe('Blog fetched successfully') 
+    expect(response.body.message).toBe('Blog fetched successfully')
     expect(response.body.data.title).toBe('Test Blog')
     expect(response.body.data.slug).toBe(slug)
   })
 
+  it('should get latest blogs', async () => {
+    const response = await request(app).get('/api/blogs/latest')
+
+    expect(response.status).toBe(200)
+    expect(response.body.message).toBe('Latest blogs fetched successfully')
+    expect(response.body.data.length).toBeGreaterThan(0)
+  })
+
   it('should update a blog', async () => {
-    const response = await request(app) 
+    const response = await request(app)
       .put(`/api/blogs/${blogId}`)
       .set('Cookie', `token=${token}`)
       .send({
@@ -108,4 +114,3 @@ describe('Blog API', () => {
     expect(response.body.message).toBe('Blog deleted successfully')
   })
 })
-

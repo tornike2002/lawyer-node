@@ -1,5 +1,12 @@
 import { Router } from 'express'
-import { createBlog, getAllBlogs, getBlogBySlug, updateBlog, deleteBlog } from '../controllers/blog'
+import {
+  createBlog,
+  getAllBlogs,
+  getBlogBySlug,
+  updateBlog,
+  deleteBlog,
+  getLatestBlogs,
+} from '../controllers/blog'
 import { validate } from '../middlewares/validate'
 import { requireAdmin } from '../middlewares/auth'
 import { updateBlogSchema, createBlogSchema } from '../validators/blog'
@@ -8,8 +15,8 @@ const router = Router()
 
 // public routes
 router.get('/', getAllBlogs)
+router.get('/latest', getLatestBlogs)
 router.get('/:slug', getBlogBySlug)
-
 // admin routes
 router.post('/', requireAdmin, validate(createBlogSchema), createBlog)
 router.put('/:id', requireAdmin, validate(updateBlogSchema), updateBlog)
@@ -94,6 +101,32 @@ export default router
  *         description: Invalid input or blog already exists
  *       401:
  *         description: Unauthorized
+ *
+ * /blogs/latest:
+ *   get:
+ *     summary: Get latest blogs
+ *     tags: [Blogs]
+ *     parameters:
+ *       - in: query
+ *         name: limit
+ *         schema:
+ *           type: integer
+ *           default: 5
+ *         description: Number of latest blogs to retrieve
+ *     responses:
+ *       200:
+ *         description: List of latest blogs
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Blog'
+ *                 message:
+ *                   type: string
  *
  * /blogs/{slug}:
  *   get:

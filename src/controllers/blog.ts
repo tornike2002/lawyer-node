@@ -60,6 +60,11 @@ export const getBlogBySlug = async (req: Request, res: Response) => {
   res.status(200).json({ message: 'Blog fetched successfully', data })
 }
 
+export const getLatestBlogs = async (_req: Request, res: Response) => {
+  const data = await Blog.find().sort({ createdAt: -1 }).limit(3)
+  res.status(200).json({ message: 'Latest blogs fetched successfully', data })
+}
+
 export const updateBlog = async (req: Request, res: Response) => {
   const data = await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true })
   if (!data) {
