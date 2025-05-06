@@ -57,6 +57,25 @@ export default router
  *         description: Forbidden - Admin access required
  *
  * /api/partner/{id}:
+ *   get:
+ *     summary: Get a partner by ID
+ *     tags: [Partners]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Partner ID
+ *     responses:
+ *       200:
+ *         description: Partner details
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Partner'
+ *       404:
+ *         description: Partner not found
  *   put:
  *     summary: Update a partner
  *     tags: [Partners]

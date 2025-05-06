@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 import QuoteSchema from '../models/QuoteCarousel'
 
-export const getAllQuoteItems = async (req: Request, res: Response) => {
+export const getAllQuoteItems = async (_req: Request, res: Response) => {
   const quoteItems = await QuoteSchema.find().sort({ createdAt: -1 }).limit(4)
   res.status(200).json(quoteItems)
 }

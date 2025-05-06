@@ -6,7 +6,7 @@ export const createPartner = async (req: Request, res: Response) => {
   res.status(201).json(data)
 }
 
-export const getAllPartners = async (req: Request, res: Response) => {
+export const getAllPartners = async (_req: Request, res: Response) => {
   const partners = await PartnerSchema.find().sort({ createdAt: -1 })
   res.status(200).json(partners)
 }

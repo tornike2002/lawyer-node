@@ -8,7 +8,7 @@ export const createContact = async (req: Request, res: Response) => {
     contact: contactData,
   })
 }
-export const getContacts = async (req: Request, res: Response) => {
+export const getContacts = async (_req: Request, res: Response) => {
   const contacts = await Contact.find()
   res.status(200).json({
     message: 'Contacts fetched successfully',
