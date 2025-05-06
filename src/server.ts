@@ -9,7 +9,7 @@ import partnerRoutes from './routes/partner'
 import contactRoutes from './routes/contact'
 import faqRoutes from './routes/faq'
 import practiceRoutes from './routes/practice'
-
+import blogRoutes from './routes/blogs'
 const app = express()
 
 app.use(cors())
@@ -25,4 +25,5 @@ app.use('/api/partner', partnerRoutes)
 app.use('/api/contact', contactRoutes)
 app.use('/api/faq', faqRoutes)
 app.use('/api/practice', practiceRoutes)
+app.use('/api/blogs', blogRoutes)
 export default app
