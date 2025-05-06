@@ -27,13 +27,13 @@ describe('Banners API', () => {
       revenue: 'revenue',
     })
     expect(res.status).toBe(201)
-    id = res.body._id
+    id = res.body.data._id
   })
 
   it('should get all banners item', async () => {
     const res = await request(app).get(`/api/banners`)
     expect(res.status).toBe(200)
-    expect(Array.isArray(res.body)).toBe(true)
+    expect(Array.isArray(res.body.data)).toBe(true)
   })
 
   it('should update a banners item', async () => {
@@ -44,10 +44,11 @@ describe('Banners API', () => {
       revenue: 'revenue',
     })
     expect(res.status).toBe(200)
-    expect(res.body.title).toBe('Test Banners')
-    expect(res.body.link).toBe('https://www.google.com')
-    expect(res.body.image).toBe('https://www.google.com')
-    expect(res.body.revenue).toBe('revenue')
+    expect(res.body.message).toBe('Banners updated successfully')
+    expect(res.body.data.title).toBe('Test Banners')
+    expect(res.body.data.link).toBe('https://www.google.com')
+    expect(res.body.data.image).toBe('https://www.google.com')
+    expect(res.body.data.revenue).toBe('revenue')
   })
 
   it('should delete banners item', async () => {

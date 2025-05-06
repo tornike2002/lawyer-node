@@ -3,12 +3,12 @@ import PartnerSchema from '../models/Partner'
 
 export const createPartner = async (req: Request, res: Response) => {
   const data = await PartnerSchema.create(req.body)
-  res.status(201).json(data)
+  res.status(201).json({ message: 'Partner created successfully', data })
 }
 
 export const getAllPartners = async (_req: Request, res: Response) => {
   const partners = await PartnerSchema.find().sort({ createdAt: -1 })
-  res.status(200).json(partners)
+  res.status(200).json({ message: 'Partners fetched successfully', data: partners })
 }
 
 export const getPartnerById = async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ export const getPartnerById = async (req: Request, res: Response) => {
     res.status(404).json({ message: 'Partner not found' })
     return
   }
-  res.status(200).json(partner)
+  res.status(200).json({ message: 'Partner fetched successfully', data: partner })
 }
 
 export const updatePartner = async (req: Request, res: Response) => {
@@ -26,7 +26,7 @@ export const updatePartner = async (req: Request, res: Response) => {
     res.status(404).json({ message: 'Partner not found' })
     return
   }
-  res.status(200).json(data)
+  res.status(200).json({ message: 'Partner updated successfully', data })
 }
 
 export const deletePartner = async (req: Request, res: Response) => {

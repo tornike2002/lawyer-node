@@ -3,12 +3,12 @@ import Banners from '../models/Banners'
 
 export const getAllBanners = async (_req: Request, res: Response) => {
   const data = await Banners.find().sort({ createdAt: -1 }).limit(2)
-  res.status(200).json(data)
+  res.status(200).json({ message: 'Banners fetched successfully', data })
 }
 
 export const createBanners = async (req: Request, res: Response) => {
   const data = await Banners.create(req.body)
-  res.status(201).json(data)
+  res.status(201).json({ message: 'Banners created successfully', data })
 }
 
 export const updateBanners = async (req: Request, res: Response) => {
@@ -18,7 +18,7 @@ export const updateBanners = async (req: Request, res: Response) => {
     res.status(404).json({ message: 'Banners item not found' })
     return
   }
-  res.status(200).json(data)
+  res.status(200).json({ message: 'Banners updated successfully', data })
 }
 
 export const deleteBanners = async (req: Request, res: Response) => {

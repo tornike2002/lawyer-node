@@ -3,12 +3,12 @@ import Carousel from '../models/Carousel'
 
 export const getAllCarousel = async (_req: Request, res: Response) => {
   const items = await Carousel.find().sort({ createdAt: -1 }).limit(4)
-  res.status(200).json(items)
+  res.status(200).json({ message: 'Carousel fetched successfully', data: items })
 }
 
 export const createCarousel = async (req: Request, res: Response) => {
   const item = await Carousel.create(req.body)
-  res.status(201).json(item)
+  res.status(201).json({ message: 'Carousel created successfully', data: item })
 }
 
 export const updateCarousel = async (req: Request, res: Response) => {
@@ -17,7 +17,7 @@ export const updateCarousel = async (req: Request, res: Response) => {
     res.status(404).json({ message: 'Carousel not found' })
     return
   }
-  res.status(200).json(updatedItem)
+  res.status(200).json({ message: 'Carousel updated successfully', data: updatedItem })
 }
 
 export const deleteCarouselItem = async (req: Request, res: Response) => {

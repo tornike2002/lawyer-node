@@ -29,13 +29,14 @@ describe('Carousel API', () => {
     })
 
     expect(res.status).toBe(201)
-    id = res.body._id
+    id = res.body.data._id
   })
 
   it('should get all carousel items', async () => {
     const res = await request(app).get('/api/carousel')
     expect(res.status).toBe(200)
-    expect(Array.isArray(res.body)).toBe(true)
+    expect(Array.isArray(res.body.data)).toBe(true)
+    expect(res.body.message).toBe('Carousel fetched successfully')
   })
 
   it('should update a carousel item', async () => {
@@ -47,8 +48,9 @@ describe('Carousel API', () => {
       link2: 'https://www.google.com',
     })
     expect(res.status).toBe(200)
-    expect(res.body.title).toBe('Updated Carousel')
-    expect(res.body.subtitle).toBe('Updated Subtitle')
+    expect(res.body.message).toBe('Carousel updated successfully')
+    expect(res.body.data.title).toBe('Updated Carousel')
+    expect(res.body.data.subtitle).toBe('Updated Subtitle')
   })
 
   it('should delete a carousel item', async () => {
