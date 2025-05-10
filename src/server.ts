@@ -13,6 +13,7 @@ import blogRoutes from './routes/blogs'
 import categoryRoutes from './routes/category'
 import tagRoutes from './routes/tags'
 import businessRoutes from './routes/business'
+import commentRoutes from './routes/comment'
 const app = express()
 
 app.use(cors())
@@ -32,4 +33,5 @@ app.use('/api/blogs', blogRoutes)
 app.use('/api/categories', categoryRoutes)
 app.use('/api/tags', tagRoutes)
 app.use('/api/business', businessRoutes)
+app.use('/api/comment', commentRoutes)
 export default app
