@@ -43,7 +43,47 @@ export default router
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/PartnerInput'
+ *             type: object
+ *             properties:
+ *               fullname:
+ *                 type: string
+ *                 minLength: 1
+ *               position:
+ *                 type: string
+ *                 minLength: 1
+ *               about:
+ *                 type: string
+ *                 minLength: 1
+ *               biography:
+ *                 type: string
+ *                 minLength: 1
+ *               image:
+ *                 type: string
+ *                 format: uri
+ *               cover:
+ *                 type: string
+ *                 format: uri
+ *               contact:
+ *                 type: object
+ *                 properties:
+ *                   linkedin:
+ *                     type: string
+ *                     format: uri
+ *                   phone:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *               services:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *             required:
+ *               - fullname
+ *               - position
+ *               - about
+ *               - biography
+ *               - image
  *     responses:
  *       201:
  *         description: Created partner
@@ -93,7 +133,47 @@ export default router
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/PartnerInput'
+ *             type: object
+ *             properties:
+ *               fullname:
+ *                 type: string
+ *                 minLength: 1
+ *               position:
+ *                 type: string
+ *                 minLength: 1
+ *               about:
+ *                 type: string
+ *                 minLength: 1
+ *               biography:
+ *                 type: string
+ *                 minLength: 1
+ *               image:
+ *                 type: string
+ *                 format: uri
+ *               cover:
+ *                 type: string
+ *                 format: uri
+ *               contact:
+ *                 type: object
+ *                 properties:
+ *                   linkedin:
+ *                     type: string
+ *                     format: uri
+ *                   phone:
+ *                     type: string
+ *                   email:
+ *                     type: string
+ *                     format: email
+ *               services:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *             required:
+ *               - fullname
+ *               - position
+ *               - about
+ *               - biography
+ *               - image
  *     responses:
  *       200:
  *         description: Updated partner

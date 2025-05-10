@@ -40,7 +40,22 @@ export default router
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/BannerInput'
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *               link:
+ *                 type: string
+ *                 format: uri
+ *               image:
+ *                 type: string
+ *                 format: uri
+ *               revenue:
+ *                 type: string
+ *                 minLength: 1
+ *             required:
+ *               - title
  *     responses:
  *       201:
  *         description: Created banner item
@@ -71,7 +86,22 @@ export default router
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/BannerInput'
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 minLength: 1
+ *               link:
+ *                 type: string
+ *                 format: uri
+ *               image:
+ *                 type: string
+ *                 format: uri
+ *               revenue:
+ *                 type: string
+ *                 minLength: 1
+ *             required:
+ *               - title
  *     responses:
  *       200:
  *         description: Updated banner item
