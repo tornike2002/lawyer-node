@@ -14,6 +14,7 @@ import categoryRoutes from './routes/category'
 import tagRoutes from './routes/tags'
 import businessRoutes from './routes/business'
 import commentRoutes from './routes/comment'
+import addressRoutes from './routes/address'
 const app = express()
 
 app.use(cors())
@@ -22,16 +23,31 @@ app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 
 app.use('/api/auth', authRoutes)
+
 app.use('/api/carousel', carouselRoutes)
+
 app.use('/api/banners', bannersRoutes)
+
 app.use('/api/quotes', quoteRoutes)
+
 app.use('/api/partner', partnerRoutes)
+
 app.use('/api/contact', contactRoutes)
+
 app.use('/api/faq', faqRoutes)
+
 app.use('/api/practice', practiceRoutes)
+
 app.use('/api/blogs', blogRoutes)
+
 app.use('/api/categories', categoryRoutes)
+
 app.use('/api/tags', tagRoutes)
+
 app.use('/api/business', businessRoutes)
+
 app.use('/api/comment', commentRoutes)
+
+app.use('/api/address', addressRoutes)
+
 export default app

@@ -120,9 +120,13 @@ export default router
  *           type: string
  *         title:
  *           type: string
- *         description:
+ *         subtitle:
  *           type: string
- *         imageUrl:
+ *         image:
+ *           type: string
+ *         link1:
+ *           type: string
+ *         link2:
  *           type: string
  *         createdAt:
  *           type: string
@@ -134,13 +138,17 @@ export default router
  *       type: object
  *       required:
  *         - title
- *         - description
- *         - imageUrl
+ *         - subtitle
+ *         - image
  *       properties:
  *         title:
  *           type: string
- *         description:
+ *         subtitle:
  *           type: string
- *         imageUrl:
+ *         image:
+ *           type: string
+ *         link1:
+ *           type: string
+ *         link2:
  *           type: string
  */
