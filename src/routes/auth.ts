@@ -1,13 +1,14 @@
 import Router from 'express'
-import { register, login, logout } from '../controllers/auth'
+import { register, login, logout, refreshToken } from '../controllers/auth'
 import { validate } from '../middlewares/validate'
 import { registerSchema, loginSchema } from '../validators/auth'
 
 const router = Router()
-// admin routes
+
 router.post('/register', validate(registerSchema), register)
 router.post('/login', validate(loginSchema), login)
 router.post('/logout', logout)
+router.post('/refresh-token', refreshToken)
 
 export default router
 
@@ -71,32 +72,17 @@ export default router
  *     responses:
  *       200:
  *         description: Admin logged out successfully
- */
-
-/**
- * @swagger
- * /api/auth/login:
+ *
+ * /api/auth/refresh-token:
  *   post:
- *     summary: Login as admin
+ *     summary: Refresh access token
  *     tags: [Auth]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             required:
- *               - email
- *               - password
- *             properties:
- *               email:
- *                 type: string
- *                 format: email
- *               password:
- *                 type: string
+ *     description: Uses refresh token cookie to generate new access token
  *     responses:
  *       200:
- *         description: Admin logged in successfully
+ *         description: Token refreshed successfully
  *       401:
- *         description: Invalid credentials
+ *         description: Unauthorized - No refresh token provided
+ *       403:
+ *         description: Forbidden - Invalid refresh token
  */

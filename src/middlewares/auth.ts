@@ -10,6 +10,7 @@ export const requireAdmin = (req: Request, res: Response, next: NextFunction): v
     res.status(401).json({ message: 'Unauthorized' })
     return
   }
+
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET!) as JWTPayload
     ;(req as any).user = decoded.id
