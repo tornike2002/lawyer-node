@@ -20,6 +20,60 @@ export default router
 
 /**
  * @swagger
+ * components:
+ *   schemas:
+ *     Partner:
+ *       type: object
+ *       properties:
+ *         _id:
+ *           type: string
+ *         fullname:
+ *           type: string
+ *           minLength: 1
+ *         position:
+ *           type: string
+ *           minLength: 1
+ *         about:
+ *           type: string
+ *           minLength: 1
+ *         biography:
+ *           type: string
+ *           minLength: 1
+ *         image:
+ *           type: string
+ *           format: uri
+ *         cover:
+ *           type: string
+ *           format: uri
+ *         contact:
+ *           type: object
+ *           properties:
+ *             linkedin:
+ *               type: string
+ *               format: uri
+ *             phone:
+ *               type: string
+ *             email:
+ *               type: string
+ *               format: email
+ *         services:
+ *           type: array
+ *           items:
+ *             type: string
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *         updatedAt:
+ *           type: string
+ *           format: date-time
+ *       required:
+ *         - fullname
+ *         - position
+ *         - about
+ *         - biography
+ *         - image
+ *
+ * @swagger
  * /api/partner:
  *   get:
  *     summary: Get all partners
