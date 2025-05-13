@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL as string)
+  await mongoose.connect(process.env.TESTIN_MONGO_URL as string)
 })
 
 afterAll(async () => {

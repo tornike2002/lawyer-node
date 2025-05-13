@@ -6,7 +6,7 @@ import mongoose from 'mongoose'
 let token: string
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL!)
+  await mongoose.connect(process.env.TESTIN_MONGO_URL!)
   const admin = await createTestAdmin()
   token = admin.token
 })
@@ -20,20 +20,12 @@ describe('Practice API', () => {
   let id: string
 
   it('should create a practice', async () => {
-    const res = await request(app)
-      .post('/api/practice')
-      .set('Cookie', `token=${token}`)
-      .send({
-        position: 'Test Position',
-        image: ['https://example.com/image.jpg'],
-        title: 'Test Practice',
-        description: 'Test Description',
-        rights: ['right1', 'right2'],
-        single: {
-          title: 'Test Single Title',
-          description: 'Test Single Description',
-        },
-      })
+    const res = await request(app).post('/api/practice').set('Cookie', `token=${token}`).send({
+      position: 'Test Position',
+      image: 'https://example.com/image.jpg',
+      title: 'Test Practice',
+      description: 'Test Description',
+    })
 
     expect(res.status).toBe(201)
     expect(res.body.message).toBe('Practice created successfully')
@@ -59,20 +51,12 @@ describe('Practice API', () => {
   })
 
   it('should update a practice', async () => {
-    const res = await request(app)
-      .put(`/api/practice/${id}`)
-      .set('Cookie', `token=${token}`)
-      .send({
-        position: 'Updated Position',
-        image: ['https://example.com/updated-image.jpg'],
-        title: 'Updated Practice',
-        description: 'Updated Description',
-        rights: ['right3', 'right4'],
-        single: {
-          title: 'Updated Single Title',
-          description: 'Updated Single Description',
-        },
-      })
+    const res = await request(app).put(`/api/practice/${id}`).set('Cookie', `token=${token}`).send({
+      position: 'Updated Position',
+      image: 'https://example.com/updated-image.jpg',
+      title: 'Updated Practice',
+      description: 'Updated Description',
+    })
 
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Practice updated successfully')

@@ -8,7 +8,7 @@ dotenv.config()
 let token: string
 
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL!)
+  await mongoose.connect(process.env.TESTIN_MONGO_URL!)
   const res = await createTestAdmin()
   token = res.token
 })

@@ -10,7 +10,7 @@ dotenv.config()
 
 let refreshToken: string
 beforeAll(async () => {
-  await mongoose.connect(process.env.MONGO_URL!)
+  await mongoose.connect(process.env.TESTIN_MONGO_URL!)
   const password = await bcrypt.hash('password', 10)
   const admin = await Admin.create({
     email: 'test@test.com',
