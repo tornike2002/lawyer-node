@@ -23,7 +23,7 @@ describe('Blog API', () => {
   it('should create a new blog', async () => {
     const response = await request(app)
       .post('/api/blogs')
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         title: 'Test Blog',
         subTitle: 'Test Subtitle',
@@ -62,7 +62,6 @@ describe('Blog API', () => {
     const response = await request(app)
       .get(`/api/blogs/${slug}`)
 
-    console.log('Get blog by slug response:', response.body, 'Slug used:', slug)
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Blog fetched successfully')
     expect(response.body.data.title).toBe('Test Blog')
@@ -80,7 +79,7 @@ describe('Blog API', () => {
   it('should update a blog', async () => {
     const response = await request(app)
       .put(`/api/blogs/${blogId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         title: 'Updated Blog',
         content: 'This is an updated blog',
@@ -108,7 +107,7 @@ describe('Blog API', () => {
   it('should delete a blog', async () => {
     const response = await request(app)
       .delete(`/api/blogs/${blogId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
 
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Blog deleted successfully')

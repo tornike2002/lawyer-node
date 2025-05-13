@@ -20,7 +20,7 @@ describe('Practice API', () => {
   let id: string
 
   it('should create a practice', async () => {
-    const res = await request(app).post('/api/practice').set('Cookie', `token=${token}`).send({
+    const res = await request(app).post('/api/practice').set('Cookie', `accessToken=${token}`).send({
       position: 'Test Position',
       image: 'https://example.com/image.jpg',
       title: 'Test Practice',
@@ -51,7 +51,7 @@ describe('Practice API', () => {
   })
 
   it('should update a practice', async () => {
-    const res = await request(app).put(`/api/practice/${id}`).set('Cookie', `token=${token}`).send({
+    const res = await request(app).put(`/api/practice/${id}`).set('Cookie', `accessToken=${token}`).send({
       position: 'Updated Position',
       image: 'https://example.com/updated-image.jpg',
       title: 'Updated Practice',
@@ -63,7 +63,7 @@ describe('Practice API', () => {
   })
 
   it('should delete a practice', async () => {
-    const res = await request(app).delete(`/api/practice/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/practice/${id}`).set('Cookie', `accessToken=${token}`)
 
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Practice deleted successfully')

@@ -42,7 +42,7 @@ describe('Comment API', () => {
   it('should create a top-level comment', async () => {
     const response = await request(app)
       .post(`/api/comment/${blogId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         name: 'Test User',
         email: 'test@example.com',
@@ -62,7 +62,7 @@ describe('Comment API', () => {
   it('should reply to a public comment', async () => {
     const res = await request(app)
       .post(`/api/comment/${blogId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         name: 'Test User',
         email: 'test@example.com',
@@ -88,7 +88,7 @@ describe('Comment API', () => {
   it('should delete a comment', async () => {
     const res = await request(app)
       .delete(`/api/comment/delete/${commentId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
 
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Comment deleted successfully')

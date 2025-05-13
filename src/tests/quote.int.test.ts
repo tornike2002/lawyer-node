@@ -22,7 +22,7 @@ describe('Quote Carousel API', () => {
   let id: string
 
   it('should create quote item', async () => {
-    const res = await request(app).post('/api/quotes').set('Cookie', `token=${token}`).send({
+    const res = await request(app).post('/api/quotes').set('Cookie', `accessToken=${token}`).send({
       quote: 'test quote',
       rating: 2.5,
       fullname: 'test name',
@@ -40,7 +40,7 @@ describe('Quote Carousel API', () => {
     expect(res.body.message).toBe('Quote Items fetched successfully')
   })
   it('should update quote item', async () => {
-    const res = await request(app).put(`/api/quotes/${id}`).set('Cookie', `token=${token}`).send({
+    const res = await request(app).put(`/api/quotes/${id}`).set('Cookie', `accessToken=${token}`).send({
       quote: 'test quote',
       rating: 2.5,
       fullname: 'test name',
@@ -55,7 +55,7 @@ describe('Quote Carousel API', () => {
   })
 
   it('should delete quote item', async () => {
-    const res = await request(app).delete(`/api/quotes/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/quotes/${id}`).set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Quote Item deleted Successfully')
   })

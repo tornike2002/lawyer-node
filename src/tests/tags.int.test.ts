@@ -22,7 +22,7 @@ describe('Tags API', () => {
   it('should create a new tag', async () => {
     const response = await request(app)
       .post('/api/tags')
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'Test Tag' })
 
     expect(response.status).toBe(201)
@@ -42,7 +42,7 @@ describe('Tags API', () => {
   it('should update a tag', async () => {
     const response = await request(app)
       .put(`/api/tags/${tagId}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'Updated Tag' })
 
     expect(response.status).toBe(200)
@@ -51,7 +51,7 @@ describe('Tags API', () => {
   })
 
   it('should delete a tag', async () => {
-    const response = await request(app).delete(`/api/tags/${tagId}`).set('Cookie', `token=${token}`)
+    const response = await request(app).delete(`/api/tags/${tagId}`).set('Cookie', `accessToken=${token}`)
 
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Tag deleted successfully')

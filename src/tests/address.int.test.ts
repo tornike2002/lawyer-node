@@ -20,12 +20,15 @@ describe('Address API', () => {
   let id: string
 
   it('should create a new address', async () => {
-    const response = await request(app).post('/api/address').set('Cookie', `token=${token}`).send({
-      city: 'Test City',
-      street: 'Test Street',
-      phone: '1234567890',
-      email: 'test@test.com',
-    })
+    const response = await request(app)
+      .post('/api/address')
+      .set('Cookie', `accessToken=${token}`)
+      .send({
+        city: 'Test City',
+        street: 'Test Street',
+        phone: '1234567890',
+        email: 'test@test.com',
+      })
     expect(response.status).toBe(201)
     expect(response.body.message).toBe('Address created successfully')
     id = response.body.address._id
@@ -40,7 +43,7 @@ describe('Address API', () => {
   it('should update an address', async () => {
     const response = await request(app)
       .put(`/api/address/${id}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         city: 'Updated City',
         street: 'Test Street',
@@ -52,7 +55,7 @@ describe('Address API', () => {
   })
 
   it('should delete an address', async () => {
-    const response = await request(app).delete(`/api/address/${id}`).set('Cookie', `token=${token}`)
+    const response = await request(app).delete(`/api/address/${id}`).set('Cookie', `accessToken=${token}`)
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Address deleted successfully')
   })

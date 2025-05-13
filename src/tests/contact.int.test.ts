@@ -21,7 +21,7 @@ describe('Contact API', () => {
   it('should create a contact', async () => {
     const res = await request(app)
       .post('/api/contact')
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'John Doe', email: 'john@doe.com', message: 'Hello, world!' })
     expect(res.status).toBe(201)
     expect(res.body.message).toBe('Contact created successfully')
@@ -29,7 +29,7 @@ describe('Contact API', () => {
   })
 
   it('should get all contacts', async () => {
-    const res = await request(app).get('/api/contact').set('Cookie', `token=${token}`)
+    const res = await request(app).get('/api/contact').set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Contacts fetched successfully')
   })
@@ -37,14 +37,14 @@ describe('Contact API', () => {
   it('should update a contact', async () => {
     const res = await request(app)
       .put(`/api/contact/${id}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'John Doe', email: 'john@doe.com', message: 'Hello, world!' })
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Contact updated successfully')
   })
 
   it('should delete a contact', async () => {
-    const res = await request(app).delete(`/api/contact/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/contact/${id}`).set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Contact deleted successfully')
   })

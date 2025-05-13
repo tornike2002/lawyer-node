@@ -44,7 +44,7 @@ describe('Partners API', () => {
 
     const res = await request(app)
       .post('/api/partner')
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send(partnerData)
 
     expect(res.status).toBe(201)
@@ -63,7 +63,7 @@ describe('Partners API', () => {
   it('should update partner', async () => {
     const res = await request(app)
       .put(`/api/partner/${id}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({
         fullname: 'test',
         position: 'test',
@@ -95,7 +95,7 @@ describe('Partners API', () => {
     if (!id) {
       const createRes = await request(app)
         .post('/api/partner')
-        .set('Cookie', `token=${token}`)
+        .set('Cookie', `accessToken=${token}`)
         .send({
           fullname: 'test for delete',
           position: 'test',

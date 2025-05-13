@@ -19,7 +19,7 @@ describe('Business API', () => {
   let id: string
 
   it('should create a business', async () => {
-    const res = await request(app).post('/api/business').set('Cookie', `token=${token}`).send({
+    const res = await request(app).post('/api/business').set('Cookie', `accessToken=${token}`).send({
       icon: 'https://example.com/icon.png',
       image: 'https://example.com/image.png',
     })
@@ -35,7 +35,7 @@ describe('Business API', () => {
   })
 
   it('should update a business', async () => {
-    const res = await request(app).put(`/api/business/${id}`).set('Cookie', `token=${token}`).send({
+    const res = await request(app).put(`/api/business/${id}`).set('Cookie', `accessToken=${token}`).send({
       icon: 'https://example.com/icon.png',
       image: 'https://example.com/image.png',
     })
@@ -44,7 +44,7 @@ describe('Business API', () => {
   })
 
   it('should delete a business', async () => {
-    const res = await request(app).delete(`/api/business/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/business/${id}`).set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Business deleted successfully')
   })

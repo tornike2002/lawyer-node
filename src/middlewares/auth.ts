@@ -5,7 +5,7 @@ interface JWTPayload {
 }
 
 export const requireAdmin = (req: Request, res: Response, next: NextFunction): void => {
-  const token = req.cookies.token
+  const token = req.cookies.accessToken
   if (!token) {
     res.status(401).json({ message: 'Unauthorized' })
     return

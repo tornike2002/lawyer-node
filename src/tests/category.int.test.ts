@@ -21,7 +21,7 @@ describe('Category API', () => {
   it('should create a new category', async () => {
     const response = await request(app)
       .post('/api/categories')
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'Test Category' })
 
     expect(response.status).toBe(201)
@@ -41,7 +41,7 @@ describe('Category API', () => {
   it('should update a category', async () => {
     const response = await request(app)
       .put(`/api/categories/${id}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
       .send({ name: 'Updated Category' })
 
     expect(response.status).toBe(200)
@@ -52,7 +52,7 @@ describe('Category API', () => {
   it('should delete a category', async () => {
     const response = await request(app)
       .delete(`/api/categories/${id}`)
-      .set('Cookie', `token=${token}`)
+      .set('Cookie', `accessToken=${token}`)
 
     expect(response.status).toBe(200)
     expect(response.body.message).toBe('Category deleted successfully')

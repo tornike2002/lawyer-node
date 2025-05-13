@@ -20,7 +20,7 @@ describe('Carousel API', () => {
   let id: string
 
   it('should create a carousel item', async () => {
-    const res = await request(app).post('/api/carousel').set('Cookie', `token=${token}`).send({
+    const res = await request(app).post('/api/carousel').set('Cookie', `accessToken=${token}`).send({
       title: 'Test Carousel',
       subtitle: 'Test Subtitle',
       image: 'https://via.placeholder.com/150',
@@ -40,7 +40,7 @@ describe('Carousel API', () => {
   })
 
   it('should update a carousel item', async () => {
-    const res = await request(app).put(`/api/carousel/${id}`).set('Cookie', `token=${token}`).send({
+    const res = await request(app).put(`/api/carousel/${id}`).set('Cookie', `accessToken=${token}`).send({
       title: 'Updated Carousel',
       subtitle: 'Updated Subtitle',
       image: 'https://via.placeholder.com/150',
@@ -54,7 +54,7 @@ describe('Carousel API', () => {
   })
 
   it('should delete a carousel item', async () => {
-    const res = await request(app).delete(`/api/carousel/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/carousel/${id}`).set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Item deleted successfully')
   })

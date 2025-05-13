@@ -20,7 +20,7 @@ describe('Banners API', () => {
   let id: string
 
   it('should create banners item', async () => {
-    const res = await request(app).post('/api/banners').set('Cookie', `token=${token}`).send({
+    const res = await request(app).post('/api/banners').set('Cookie', `accessToken=${token}`).send({
       title: 'Test Banners',
       link: 'https://www.google.com',
       image: 'https://www.google.com',
@@ -37,7 +37,7 @@ describe('Banners API', () => {
   })
 
   it('should update a banners item', async () => {
-    const res = await request(app).put(`/api/banners/${id}`).set('Cookie', `token=${token}`).send({
+    const res = await request(app).put(`/api/banners/${id}`).set('Cookie', `accessToken=${token}`).send({
       title: 'Test Banners',
       link: 'https://www.google.com',
       image: 'https://www.google.com',
@@ -52,7 +52,7 @@ describe('Banners API', () => {
   })
 
   it('should delete banners item', async () => {
-    const res = await request(app).delete(`/api/banners/${id}`).set('Cookie', `token=${token}`)
+    const res = await request(app).delete(`/api/banners/${id}`).set('Cookie', `accessToken=${token}`)
     expect(res.status).toBe(200)
     expect(res.body.message).toBe('Banner item deleted successfully')
   })
