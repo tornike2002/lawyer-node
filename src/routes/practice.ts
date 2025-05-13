@@ -23,7 +23,6 @@ router.put('/:id', requireAdmin, validate(practiceSchema), updatePractice)
 router.delete('/:id', requireAdmin, deletePractice)
 
 export default router
-
 /**
  * @swagger
  * tags:
@@ -184,29 +183,14 @@ export default router
  *           type: string
  *           minLength: 3
  *         image:
- *           type: array
- *           items:
- *             type: string
- *             format: url
+ *           type: string
+ *           format: url
  *         title:
  *           type: string
  *           minLength: 3
  *         description:
  *           type: string
  *           minLength: 3
- *         rights:
- *           type: array
- *           items:
- *             type: string
- *         single:
- *           type: object
- *           properties:
- *             title:
- *               type: string
- *               minLength: 3
- *             description:
- *               type: string
- *               minLength: 3
  *         createdAt:
  *           type: string
  *           format: date-time
