@@ -7,7 +7,7 @@ export const createPartner = async (req: Request, res: Response) => {
 }
 
 export const getAllPartners = async (req: Request, res: Response) => {
-  const { limit = 10 } = req.query
+  const { limit = 10 } = req.params
   const partners = await PartnerSchema.find().sort({ createdAt: -1 }).limit(Number(limit))
   res.status(200).json({ message: 'Partners fetched successfully', data: partners })
 }
