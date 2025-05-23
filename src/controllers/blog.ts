@@ -29,7 +29,7 @@ export const createBlog = async (req: Request, res: Response) => {
 }
 
 export const getAllBlogs = async (req: Request, res: Response) => {
-  const { category, tags, search, page = 1, limit = 10 } = req.query
+  const { category, tags, search, page = 1, limit = 5 } = req.query
 
   const filters: BlogFilters = {}
   if (category) filters.category = category as string
