@@ -1,7 +1,8 @@
 import Router from 'express'
-import { register, login, logout, refreshToken } from '../controllers/auth'
+import { register, login, logout, refreshToken, me } from '../controllers/auth'
 import { validate } from '../middlewares/validate'
 import { registerSchema, loginSchema } from '../validators/auth'
+import { requireAdmin } from '../middlewares/auth'
 
 const router = Router()
 
@@ -10,7 +11,42 @@ router.post('/login', validate(loginSchema), login)
 router.post('/logout', logout)
 router.post('/refresh-token', refreshToken)
 
+// private
+router.get('/me', requireAdmin, me)
+
 export default router
+/**
+ * @swagger
+ * /api/auth/me:
+ *   get:
+ *     summary: Get current admin profile
+ *     tags: [Auth]
+ *     security:
+ *       - cookieAuth: []
+ *     responses:
+ *       200:
+ *         description: Admin fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: Admin fetched successfully
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     _id:
+ *                       type: string
+ *                       example: 6074a2d8ccd6b74ad8b7fb72
+ *                     email:
+ *                       type: string
+ *                       format: email
+ *                       example: admin@example.com
+ *       401:
+ *         description: Unauthorized - Invalid or missing token
+ */
 
 /**
  * @swagger

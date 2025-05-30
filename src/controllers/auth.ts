@@ -84,7 +84,7 @@ export const logout = async (req: Request, res: Response) => {
 
 export const refreshToken = async (req: Request, res: Response) => {
   const refreshToken = req.cookies.refreshToken
-  
+
   if (!refreshToken) {
     res.status(401).json({
       message: 'Unauthorized',
@@ -117,5 +117,24 @@ export const refreshToken = async (req: Request, res: Response) => {
   })
   res.status(200).json({
     message: 'Token refreshed',
+  })
+}
+
+export const me = async (req: Request, res: Response) => {
+  const userId = req.user
+  const admin = await Admin.findById(userId)
+
+  if (!admin) {
+    res.status(401).json({
+      message: 'Unauthorized',
+    })
+    return
+  }
+  res.status(200).json({
+    message: 'Admin fetched successfully',
+    data: {
+      _id: admin._id,
+      email: admin.email,
+    },
   })
 }
