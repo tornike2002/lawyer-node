@@ -26,12 +26,10 @@ export const register = async (req: Request, res: Response) => {
   await admin.save()
   res.cookie('accessToken', accessToken, {
     httpOnly: true,
-    sameSite: 'lax',
     secure: process.env.NODE_ENV !== 'development',
   })
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
-    sameSite: 'lax',
     secure: process.env.NODE_ENV !== 'development',
   })
   res.status(201).json({
