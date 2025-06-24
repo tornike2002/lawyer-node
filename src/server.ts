@@ -74,9 +74,11 @@ app.use('/api/comment', commentRoutes)
 app.use('/api/address', addressRoutes)
 
 // Catch-all handler for undefined routes
-app.use('*', (req, res) => {
+app.use((req, res) => {
   res.status(404).json({
     message: 'Route not found',
+    path: req.path,
+    method: req.method,
     availableRoutes: [
       'GET /',
       'GET /health',
