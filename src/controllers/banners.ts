@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Banners from '../models/Banners'
+import Banners from '../models/Banner'
 
 export const getAllBanners = async (_req: Request, res: Response) => {
   const data = await Banners.find().sort({ createdAt: -1 }).limit(2)
