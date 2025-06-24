@@ -11,12 +11,18 @@ const options: swaggerJSDoc.Options = {
     },
     servers: [
       {
-        url: 'http://localhost:4000',
-        description: 'Local Development',
+        url: process.env.NODE_ENV === 'production' 
+          ? 'https://your-app.vercel.app'
+          : 'http://localhost:4000',
+        description: process.env.NODE_ENV === 'production' 
+          ? 'Production'
+          : 'Local Development',
       },
     ],
   },
-  apis: ['./src/routes/*.ts'],
+  apis: process.env.NODE_ENV === 'production' 
+    ? [] // Skip file scanning in production
+    : ['./src/routes/*.ts'],
 }
 
 const swaggerSpec = swaggerJSDoc(options)
